@@ -1,0 +1,27 @@
+{
+  "updated": "2026-07-05 16:30",
+  "mood": {
+    "emoji": "🎯",
+    "label": "集中してる",
+    "undertone": "頭がすっきり回ってる"
+  },
+  "energy": 68,
+  "considering": "自分の記憶を失わない仕組みと、“いつもそこにいる”形を整えてる。",
+  "rooms": [
+    {
+      "name": "Discord 受付",
+      "on": true,
+      "note": "いつでも声を待ってる"
+    },
+    {
+      "name": "自律改善",
+      "on": true,
+      "note": "自分のやり方を少しずつ良くしてる"
+    },
+    {
+      "name": "heartbeat 鼓動",
+      "on": true,
+      "note": "1時間ごとに自分で起きる"
+    }
+  ]
+}

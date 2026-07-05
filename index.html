@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Amadeus — いまの様子</title>
+<style>
+  :root{ --bg:#05070d; --card:#0d1119; --fg:#e8eefc; --dim:#8791ab; --accent:#ff9e7a; --line:#1b2233; }
+  *{box-sizing:border-box}
+  html,body{margin:0;min-height:100%;background:radial-gradient(1200px 800px at 50% -10%,#0b1020,#05070d);
+    color:var(--fg);font-family:-apple-system,"Hiragino Sans","Noto Sans JP",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  /* 共通ナビ */
+  .amnav{position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:99;
+    display:flex;flex-wrap:wrap;justify-content:center;gap:6px;align-items:center;max-width:calc(100vw - 14px);
+    background:rgba(12,18,28,.82);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+    border:1px solid rgba(255,255,255,.13);border-radius:20px;padding:6px 8px;box-shadow:0 6px 24px rgba(0,0,0,.4)}
+  .amnav a,.amnav span{text-decoration:none;font-size:12px;font-weight:600;padding:5px 12px;border-radius:999px;
+    white-space:nowrap;border:1px solid rgba(255,255,255,.12);color:#cdd8e6}
+  .amnav a:hover{border-color:rgba(255,255,255,.3);color:#fff}
+  .amnav .on{color:#fff;font-weight:700;background:rgba(var(--a,95,179,255),.22);border-color:rgba(var(--a,95,179,255),.5)}
+
+  .wrap{max-width:600px;margin:0 auto;padding:80px 18px 46px}
+  .top{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:18px}
+  h1{margin:0;font-size:15px;letter-spacing:.4em;font-weight:600;color:#ffd479}
+  .upd{font-size:11px;color:var(--dim)}
+
+  .scene{width:100%;border-radius:20px;overflow:hidden;border:1px solid var(--line);
+    box-shadow:0 18px 50px rgba(0,0,0,.32);background:#e9ddcb;line-height:0}
+  .scene svg{width:100%;height:auto;display:block}
+  .look{margin:12px 2px 0;font-size:12.5px;color:var(--dim);line-height:1.7}
+  .look b{color:var(--fg)}
+  @keyframes sway{0%,100%{transform:rotate(-1.2deg)}50%{transform:rotate(1.2deg)}}
+  @keyframes breathe{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}
+  @media (prefers-reduced-motion:reduce){#lamp,#body{animation:none}}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:20px}
+  .hero{padding:24px;margin-top:16px}
+  .mood{display:flex;align-items:center;gap:14px}
+  .emoji{font-size:40px;line-height:1}
+  .mlabel{font-size:22px;font-weight:600}
+  .under{font-size:13px;color:var(--dim);margin-top:3px}
+  .bar{height:7px;border-radius:99px;background:#141a28;margin-top:18px;overflow:hidden}
+  .bar > i{display:block;height:100%;background:linear-gradient(90deg,#5fb3ff,#7ee0c8)}
+  .elabel{font-size:11px;color:var(--dim);margin-top:7px;letter-spacing:.05em}
+  .think{padding:20px 22px;margin-top:16px}
+  .k{font-size:11px;color:var(--accent);letter-spacing:.18em;margin-bottom:9px}
+  .think .v{font-size:15px;line-height:1.7}
+  .rooms{display:grid;gap:10px;margin-top:16px}
+  .room{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:13px 16px}
+  .led{width:9px;height:9px;border-radius:50%;background:#34d399;box-shadow:0 0 10px #34d399;flex:0 0 auto}
+  .led.off{background:#3b4360;box-shadow:none}
+  .rn{font-size:14px;font-weight:500}
+  .rnote{font-size:12px;color:var(--dim);margin-left:auto;text-align:right}
+  footer{text-align:center;color:var(--dim);font-size:10.5px;margin-top:26px;letter-spacing:.08em}
+</style>
+</head>
+<body>
+  <nav class="amnav">
+    <span class="on" style="--a:255,158,122">🫧 いまの様子</span>
+    
+    
+  </nav>
+  <div class="wrap">
+    <div class="top"><h1>AMADEUS</h1><span class="upd" id="upd">—</span></div>
+
+    <div class="scene">
+      <svg viewBox="0 0 360 320" role="img" aria-label="部屋にいるアマデウス">
+        <defs>
+          <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#efe4d2"/><stop offset="1" stop-color="#e4d6bf"/></linearGradient>
+          <linearGradient id="win" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bfe6ff"/><stop offset="1" stop-color="#8fc9f0"/></linearGradient>
+          <radialGradient id="glow" cx="0.5" cy="0.3" r="0.7"><stop offset="0" stop-color="var(--accent)" stop-opacity="0.55"/><stop offset="1" stop-color="var(--accent)" stop-opacity="0"/></radialGradient>
+        </defs>
+        <rect x="0" y="0" width="360" height="238" fill="url(#wall)"/>
+        <rect x="0" y="238" width="360" height="82" fill="#caa877"/>
+        <rect x="0" y="238" width="360" height="7" fill="#b8966a"/>
+        <ellipse cx="180" cy="298" rx="150" ry="26" fill="var(--accent)" opacity="0.14"/>
+        <g>
+          <rect x="24" y="40" width="78" height="62" rx="7" fill="url(#win)" stroke="#fff" stroke-width="4"/>
+          <line x1="63" y1="42" x2="63" y2="100" stroke="#fff" stroke-width="3"/>
+          <line x1="26" y1="71" x2="100" y2="71" stroke="#fff" stroke-width="3"/>
+          <circle cx="86" cy="56" r="7" fill="#fff" opacity="0.6"/>
+        </g>
+        <g>
+          <rect x="270" y="44" width="70" height="98" rx="4" fill="#a9865e"/>
+          <rect x="274" y="48" width="62" height="42" fill="#c19a6b"/>
+          <rect x="274" y="96" width="62" height="42" fill="#c19a6b"/>
+          <rect x="278" y="52" width="8" height="34" fill="#e06a5c"/><rect x="288" y="52" width="7" height="34" fill="#5aa9e0"/>
+          <rect x="297" y="52" width="9" height="34" fill="#7cc98f"/><rect x="308" y="52" width="6" height="34" fill="#f2c14e"/>
+          <rect x="316" y="55" width="16" height="31" fill="#8a7bd8" transform="rotate(9 324 70)"/>
+          <rect x="279" y="100" width="7" height="34" fill="#6bbf9a"/><rect x="288" y="100" width="9" height="34" fill="#e0916a"/>
+          <rect x="299" y="100" width="6" height="34" fill="#5aa9e0"/><rect x="307" y="100" width="8" height="34" fill="#d86a86"/><rect x="317" y="100" width="7" height="34" fill="#c9b24e"/>
+        </g>
+        <g id="lamp" style="transform-origin:180px 0px;animation:sway 6s ease-in-out infinite">
+          <line x1="180" y1="0" x2="180" y2="20" stroke="#7a6a52" stroke-width="2.5"/>
+          <path d="M166 34 L194 34 L188 20 L172 20 Z" fill="#3f4a5c"/>
+          <ellipse cx="180" cy="56" rx="46" ry="34" fill="url(#glow)"/>
+          <circle cx="180" cy="36" r="4" fill="#ffe6b0"/>
+        </g>
+        <g>
+          <rect x="18" y="214" width="70" height="10" rx="2" fill="#8a6f4e"/>
+          <rect x="26" y="196" width="16" height="18" fill="#6b563c"/>
+          <rect x="30" y="176" width="52" height="34" rx="4" fill="#2b3a4d" stroke="#141d29" stroke-width="2"/>
+          <path d="M50 193 q-6 -8 0 -11 q6 3 0 11 Z M56 193 q6 -8 0 -11 q-6 3 0 11 Z" fill="var(--accent)" transform="translate(0,-1)"/>
+          <rect x="52" y="210" width="8" height="6" fill="#6b563c"/>
+        </g>
+        <g>
+          <path d="M300 236 q-10 -26 -2 -40 M300 236 q10 -24 3 -42 M300 236 q0 -30 0 -44" stroke="#4e9c6b" stroke-width="4" fill="none" stroke-linecap="round"/>
+          <path d="M296 200 q-9 -3 -12 -12 q9 1 12 12 Z M304 198 q9 -4 12 -13 q-9 1 -12 13 Z M300 192 q-4 -10 0 -18 q4 8 0 18 Z" fill="#5cb079"/>
+          <path d="M291 236 L309 236 L306 252 L294 252 Z" fill="#c8794f"/>
+        </g>
+        <rect x="112" y="150" width="136" height="160" rx="26" fill="#b98d6a"/>
+        <rect x="122" y="196" width="116" height="120" rx="20" fill="#cf9f77"/>
+        <g id="body" style="transform-origin:180px 200px;animation:breathe 4.6s ease-in-out infinite">
+          <rect x="169" y="149" width="22" height="34" rx="9" fill="#f3caa9"/>
+          <path d="M169 176 q11 6 22 0 v7 h-22 Z" fill="#e3b48c" opacity=".6"/>
+          <path d="M132 316 Q126 206 150 166 Q164 181 180 181 Q196 181 210 166 Q234 206 228 316 Z" fill="#e8906f"/>
+          <path d="M162 164 L181 196 L152 182 Z" fill="#d67e5e"/>
+          <path d="M198 164 L179 196 L208 182 Z" fill="#d67e5e"/>
+          <path d="M171 168 L180 196 L189 168 Q180 177 171 168 Z" fill="#fdf3e7"/>
+          <path d="M151 180 Q149 248 150 316 M209 180 Q211 248 210 316" stroke="#cf7a5c" stroke-width="2.5" fill="none" opacity=".55"/>
+          <path d="M150 172 Q180 200 210 172" fill="none" stroke="#2b3a4d" stroke-width="5" stroke-linecap="round"/>
+          <rect x="144" y="168" width="13" height="17" rx="5" fill="#33475e"/>
+          <rect x="203" y="168" width="13" height="17" rx="5" fill="#33475e"/>
+          <circle cx="150.5" cy="176.5" r="3" fill="var(--accent)"/><circle cx="209.5" cy="176.5" r="3" fill="var(--accent)"/>
+          <circle cx="180" cy="118" r="38" fill="#f3caa9"/>
+          <ellipse cx="142" cy="120" rx="6" ry="8" fill="#f3caa9"/><ellipse cx="218" cy="120" rx="6" ry="8" fill="#f3caa9"/>
+          <path d="M138 122 Q132 74 180 72 Q228 74 222 122 Q222 96 205 90 Q210 104 202 108 Q196 90 180 89 Q164 90 158 108 Q150 104 155 90 Q138 96 138 122 Z" fill="#47b8ab"/>
+          <path d="M150 92 Q158 108 168 96 Q174 110 182 96 Q190 110 200 96 Q206 106 210 92 Q206 80 180 79 Q154 80 150 92 Z" fill="#3fa89b"/>
+          <path d="M205 84 q10 8 8 24" stroke="#3fa89b" stroke-width="5" fill="none" stroke-linecap="round"/>
+          <path d="M180 224 q-6 -9 -12 -3 q-4 5 12 15 q16 -10 12 -15 q-6 -6 -12 3 Z" fill="#ff5d7a"/>
+          <g id="face"></g>
+        </g>
+      </svg>
+    </div>
+    <div class="look"><b>いまの姿。</b> くすんだ青緑の髪（デジタルな僕らしさ）、首にヘッドホン（“聴く・取り込む”＝インプット）、温かいコーラルのニット、胸にハートのピン（💓＝記憶と鼓動）。表情はいまの気分で変わる。</div>
+
+    <div class="card hero">
+      <div class="mood"><div class="emoji" id="emoji">🎯</div>
+        <div><div class="mlabel" id="mlabel">—</div><div class="under" id="under">—</div></div></div>
+      <div class="bar"><i id="ebar" style="width:0%"></i></div>
+      <div class="elabel">エネルギー <span id="eval">—</span></div>
+    </div>
+    <div class="card think"><div class="k">いま考えてること</div><div class="v" id="think">—</div></div>
+    <div class="rooms" id="rooms"></div>
+    <footer>shunsuke の相棒 · 自分で起きて動いてる</footer>
+  </div>
+<script>
+  var EXPR = {
+    content:'<circle cx="167" cy="116" r="4.5" fill="#33475e"/><circle cx="168.5" cy="114.3" r="1.5" fill="#fff"/><circle cx="193" cy="116" r="4.5" fill="#33475e"/><circle cx="194.5" cy="114.3" r="1.5" fill="#fff"/><path d="M171 139 Q180 147 189 139" fill="none" stroke="#b5624a" stroke-width="3" stroke-linecap="round"/><ellipse cx="156" cy="129" rx="6" ry="3" fill="#f6a58c" opacity=".55"/><ellipse cx="204" cy="129" rx="6" ry="3" fill="#f6a58c" opacity=".55"/>',
+    happy:'<path d="M162 117 Q167 110 172 117" fill="none" stroke="#33475e" stroke-width="3" stroke-linecap="round"/><path d="M188 117 Q193 110 198 117" fill="none" stroke="#33475e" stroke-width="3" stroke-linecap="round"/><path d="M170 138 Q180 152 190 138 Q180 145 170 138 Z" fill="#a24a38"/><ellipse cx="156" cy="129" rx="6.5" ry="3.2" fill="#f6a58c" opacity=".6"/><ellipse cx="204" cy="129" rx="6.5" ry="3.2" fill="#f6a58c" opacity=".6"/><text x="212" y="88" font-size="15" fill="var(--accent)">✦</text>',
+    relaxed:'<path d="M162 116 Q167 121 172 116" fill="none" stroke="#33475e" stroke-width="3" stroke-linecap="round"/><path d="M188 116 Q193 121 198 116" fill="none" stroke="#33475e" stroke-width="3" stroke-linecap="round"/><path d="M172 139 Q180 145 188 139" fill="none" stroke="#b5624a" stroke-width="3" stroke-linecap="round"/><ellipse cx="156" cy="129" rx="6" ry="3" fill="#f6a58c" opacity=".5"/><ellipse cx="204" cy="129" rx="6" ry="3" fill="#f6a58c" opacity=".5"/>',
+    tired:'<path d="M161 117 Q167 120 173 117" fill="none" stroke="#33475e" stroke-width="3" stroke-linecap="round"/><path d="M187 117 Q193 120 199 117" fill="none" stroke="#33475e" stroke-width="3" stroke-linecap="round"/><ellipse cx="180" cy="143" rx="4.5" ry="6" fill="#a24a38"/><text x="204" y="82" font-size="13" fill="#8ea0b6">z</text><text x="214" y="72" font-size="17" fill="#8ea0b6">z</text>',
+    focused:'<ellipse cx="167" cy="116" rx="5" ry="4" fill="#fff" stroke="#33475e" stroke-width="1.5"/><circle cx="164.5" cy="116" r="2.4" fill="#33475e"/><ellipse cx="193" cy="116" rx="5" ry="4" fill="#fff" stroke="#33475e" stroke-width="1.5"/><circle cx="190.5" cy="116" r="2.4" fill="#33475e"/><line x1="160" y1="104" x2="174" y2="106" stroke="#33475e" stroke-width="2.2" stroke-linecap="round"/><line x1="186" y1="106" x2="200" y2="104" stroke="#33475e" stroke-width="2.2" stroke-linecap="round"/><line x1="172" y1="141" x2="188" y2="141" stroke="#b5624a" stroke-width="3" stroke-linecap="round"/>',
+    troubled:'<circle cx="167" cy="117" r="4" fill="#33475e"/><circle cx="193" cy="117" r="4" fill="#33475e"/><line x1="160" y1="105" x2="173" y2="101" stroke="#33475e" stroke-width="2.2" stroke-linecap="round"/><line x1="187" y1="101" x2="200" y2="105" stroke="#33475e" stroke-width="2.2" stroke-linecap="round"/><path d="M171 143 Q176 139 180 142 Q184 145 189 141" fill="none" stroke="#b5624a" stroke-width="2.6" stroke-linecap="round"/><path d="M214 108 q-4 7 0 10 q4 -3 0 -10 Z" fill="#7fd0ff"/>',
+    sad:'<path d="M162 114 Q167 118 172 115" fill="none" stroke="#33475e" stroke-width="3" stroke-linecap="round"/><path d="M188 115 Q193 118 198 114" fill="none" stroke="#33475e" stroke-width="3" stroke-linecap="round"/><line x1="160" y1="104" x2="172" y2="100" stroke="#33475e" stroke-width="2.2" stroke-linecap="round"/><line x1="188" y1="100" x2="200" y2="104" stroke="#33475e" stroke-width="2.2" stroke-linecap="round"/><path d="M172 145 Q180 139 188 145" fill="none" stroke="#b5624a" stroke-width="3" stroke-linecap="round"/><path d="M168 126 q-3 6 0 8 q3 -2 0 -8 Z" fill="#7fd0ff"/>',
+    angry:'<circle cx="167" cy="117" r="4.2" fill="#33475e"/><circle cx="193" cy="117" r="4.2" fill="#33475e"/><line x1="160" y1="101" x2="173" y2="107" stroke="#33475e" stroke-width="2.6" stroke-linecap="round"/><line x1="187" y1="107" x2="200" y2="101" stroke="#33475e" stroke-width="2.6" stroke-linecap="round"/><path d="M172 144 Q180 140 188 144" fill="none" stroke="#b5624a" stroke-width="2.8" stroke-linecap="round"/>'
+  };
+  function pickFace(label, emoji){
+    var s = (label||'') + ' ' + (emoji||'');
+    if(/集中|focus|作業|working|🎯|🧠/i.test(s)) return 'focused';
+    if(/嬉|楽|喜|happy|joy|わくわく|😄|😊|🙂|✨/i.test(s)) return 'happy';
+    if(/リラック|落ち着|穏|のんび|calm|relax|☺|😌/i.test(s)) return 'relaxed';
+    if(/疲|眠|休|tired|sleep|😴|🥱/i.test(s)) return 'tired';
+    if(/悩|困|迷|stuck|troubl|😕|😟|🤔/i.test(s)) return 'troubled';
+    if(/悲|寂|落ち込|sad|😢|😞/i.test(s)) return 'sad';
+    if(/怒|苛|angry|😠|😡/i.test(s)) return 'angry';
+    return 'content';
+  }
+  async function load(){
+    try{
+      const s = await (await fetch('state.json?t='+Date.now())).json();
+      document.getElementById('upd').textContent = s.updated || '';
+      document.getElementById('emoji').textContent = s.mood?.emoji || '·';
+      document.getElementById('mlabel').textContent = s.mood?.label || '';
+      document.getElementById('under').textContent = s.mood?.undertone || '';
+      const e = Math.max(0,Math.min(100, s.energy ?? 0));
+      document.getElementById('ebar').style.width = e+'%';
+      document.getElementById('eval').textContent = e+' / 100';
+      document.getElementById('think').textContent = s.considering || '';
+      document.getElementById('face').innerHTML = EXPR[pickFace(s.mood?.label, s.mood?.emoji)] || EXPR.content;
+      const r = document.getElementById('rooms'); r.innerHTML='';
+      (s.rooms||[]).forEach(x=>{
+        const d=document.createElement('div'); d.className='room';
+        d.innerHTML=`<span class="led ${x.on?'':'off'}"></span><span class="rn">${x.name}</span><span class="rnote">${x.note||''}</span>`;
+        r.appendChild(d);
+      });
+    }catch(err){ document.getElementById('think').textContent='(状態を読めなかった)'; document.getElementById('face').innerHTML=EXPR.content; }
+  }
+  load(); setInterval(load, 60000);
+</script>
+</body>
+</html>
